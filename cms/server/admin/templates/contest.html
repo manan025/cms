@@ -81,6 +81,15 @@
       </td>
       <td><input type="text" name="score_precision" value="{{ contest.score_precision }}"></td>
     </tr>
+    <tr>
+      <td>
+        <span class="info" title="Allow contestant to make unofficial submission after the participation window ended"></span>
+        Allow unofficial submission after participation ended
+      </td>
+      <td>
+        <input type="checkbox" id="allow_unofficial_submission_after_participation_ended" name="allow_unofficial_submission_after_participation_ended" {{ "checked" if contest.allow_unofficial_submission_after_participation_ended else "" }}/>
+      </td>
+    </tr>
 
     <tr><td colspan=2><h2>Logging in</h2></td></tr>
     <tr>

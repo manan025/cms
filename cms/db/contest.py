@@ -99,6 +99,12 @@ class Contest(Base):
         nullable=False,
         default=True)
 
+    # Allow unofficial submission after participation ended
+    allow_unofficial_submission_after_participation_ended = Column(
+        Boolean,
+        nullable=False,
+        default=False)
+
     # Whether to prevent hidden participations to log in.
     block_hidden_participations = Column(
         Boolean,
