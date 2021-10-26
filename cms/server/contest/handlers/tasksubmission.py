@@ -71,9 +71,8 @@ class SubmitHandler(ContestHandler):
     @multi_contest
     def post(self, task_name):
         # Reject submission if the contest disallow unofficial submission outside of official window or analysis mode
-        if not self.contest.allow_unofficial_submission_after_participation_ended and \
-                self.r_params["actual_phase"] != 0 and \
-                self.r_params["actual_phase"] != 3:
+        if 0 < self.r_params["actual_phase"] < 3 and \
+                not self.contest.allow_unofficial_submission_before_analysis_mode:
             self.redirect(self.contest_url())
             return
 

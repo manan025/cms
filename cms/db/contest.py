@@ -100,7 +100,7 @@ class Contest(Base):
         default=True)
 
     # Allow unofficial submission after participation ended
-    allow_unofficial_submission_after_participation_ended = Column(
+    allow_unofficial_submission_before_analysis_mode = Column(
         Boolean,
         nullable=False,
         default=False)
