@@ -419,7 +419,7 @@ class ScoreTypeGroup(ScoreTypeAlone):
 
             score += st_score
             subtasks.append({
-                "idx": st_idx + 1,
+                "idx": st_idx,
                 # We store the fraction so that an "example" testcase
                 # with a max score of zero is still properly rendered as
                 # correct or incorrect.
