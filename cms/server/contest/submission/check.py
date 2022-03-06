@@ -33,7 +33,7 @@ the current situation. Also include some support functions, which are
 exported as they may be of general interest.
 
 """
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from sqlalchemy import desc, func
 
@@ -178,7 +178,7 @@ def check_min_interval(
             or timestamp - submission.timestamp >= min_interval)
 
 
-def is_last_minutes(timestamp: datetime, participation: Participation, delta=timedelta(minutes=15)):
+def is_last_minutes(timestamp: datetime, participation: Participation):
     """
     timestamp (datetime): the current timestamp.
     participation (Participation): the participation to be checked.
@@ -187,6 +187,10 @@ def is_last_minutes(timestamp: datetime, participation: Participation, delta=tim
     return (bool): whether it is the last `delta` of the participation.
     """
 
+    if participation.unrestricted \
+            or participation.contest.min_submission_interval_grace_period is None:
+        return False
+
     if participation.contest.per_user_time is None:
         end_time = participation.contest.stop
     else:
@@ -194,4 +198,5 @@ def is_last_minutes(timestamp: datetime, participation: Participation, delta=tim
 
     end_time += participation.delay_time + participation.extra_time
     time_left = end_time - timestamp
-    return time_left <= delta
+    return time_left <= \
+        participation.contest.min_submission_interval_grace_period
